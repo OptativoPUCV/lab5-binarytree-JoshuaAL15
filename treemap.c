@@ -52,8 +52,64 @@ TreeMap *createTreeMap(int (*lower_than)(void* key1, void* key2)) {
     return map;
 }
 
-void insertTreeMap(TreeMap * tree, void* key, void * value) {
+void insertTreeMap(TreeMap *tree, void *key, void *value) {
+    TreeNode *current = NULL;
+    searchTreeMap(tree, key, &current); // Busca la clave en el árbol y actualiza el puntero 'current'
 
+    if (current != NULL) {
+        // La clave ya existe en el árbol, no hagas nada
+        return;
+    }
+
+    // Crea un nuevo nodo para el nuevo dato
+    TreeNode *new_node = (TreeNode *)malloc(sizeof(TreeNode));
+    if (new_node == NULL) {
+        // Error: No se pudo reservar memoria para el nuevo nodo
+        return;
+    }
+
+    // Inicializa el nuevo nodo con el par (key, value)
+    new_node->pair = (Pair *)malloc(sizeof(Pair));
+    if (new_node->pair == NULL) {
+        // Error: No se pudo reservar memoria para el par (key, value)
+        free(new_node); // Libera la memoria del nuevo nodo antes de salir
+        return;
+    }
+    new_node->pair->key = key;
+    new_node->pair->value = value;
+    new_node->left = NULL;
+    new_node->right = NULL;
+
+    // Inserta el nuevo nodo en el árbol
+    if (tree->root == NULL) {
+        // El árbol está vacío, el nuevo nodo se convierte en la raíz
+        tree->root = new_node;
+    } else {
+        // Busca la posición correcta para insertar el nuevo nodo
+        current = tree->root;
+        TreeNode *parent = NULL;
+        while (current != NULL) {
+            parent = current;
+            if (tree->lower_than(key, current->pair->key)) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
+        }
+
+        // Inserta el nuevo nodo como hijo del nodo encontrado
+        if (tree->lower_than(key, parent->pair->key)) {
+            parent->left = new_node;
+        } else {
+            parent->right = new_node;
+        }
+    }
+
+    // Incrementa el tamaño del árbol
+    tree->size++;
+
+    // Actualiza el puntero 'current' para que apunte al nuevo nodo
+    current = new_node;
 }
 
 TreeNode * minimum(TreeNode * x){
