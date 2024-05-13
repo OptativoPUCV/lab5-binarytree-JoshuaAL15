@@ -54,7 +54,7 @@ TreeMap *createTreeMap(int (*lower_than)(void* key1, void* key2)) {
 
 void insertTreeMap(TreeMap *tree, void *key, void *value) {
     TreeNode *current = NULL;
-    searchTreeMap(tree, key, &current); // Busca la clave en el árbol y actualiza el puntero 'current'
+    searchTreeMap(tree, key); // Busca la clave en el árbol y actualiza el puntero 'current'
 
     if (current != NULL) {
         // La clave ya existe en el árbol, no hagas nada
@@ -135,7 +135,7 @@ void eraseTreeMap(TreeMap * tree, void* key){
     TreeNode *current = NULL;
     if (tree == NULL || tree->root == NULL) return;
 
-    if (searchTreeMap(tree, key, &current) == NULL) return;
+    if (searchTreeMap(tree, key ) == NULL) return;
     removeNode(tree, current );
 
 }
