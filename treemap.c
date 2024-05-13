@@ -143,10 +143,10 @@ Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
             return (*current)->pair;
         } else if (cmp < 0) {
 
-            current = (*current)->left;
+            *current =(*current)->left;
         } else {
 
-            current = (*current)->right;
+            *current =(*current)->right;
         }
     }
     return NULL;
