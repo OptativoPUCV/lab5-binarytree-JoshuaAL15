@@ -141,19 +141,19 @@ void eraseTreeMap(TreeMap * tree, void* key){
 }
 
 Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
-    *current = tree->root;
-
+    TreeNode *temp = tree->root;
+    *current = NULL;
     while (*current != NULL) {
-        int cmp = tree->lower_than(key, (*current)->pair->key);
+        int cmp = tree->lower_than(key,temp->pair->key);
         if (cmp == 0) {
             // Se encontró la clave, devuelve el par asociado
-            return (*current)->pair;
+            return temp->pair;
         } else if (cmp < 0) {
             // La clave buscada es menor que la clave actual, busca en el subárbol izquierdo
-            *current = (*current)->left;
+            *current = temp->left;
         } else {
             // La clave buscada es mayor que la clave actual, busca en el subárbol derecho
-            *current = (*current)->right;
+            *current = temp->right;
         }
     }
 
