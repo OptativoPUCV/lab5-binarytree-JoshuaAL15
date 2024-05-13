@@ -17,6 +17,7 @@ struct TreeMap {
     TreeNode * root;
     TreeNode * current;
     int (*lower_than) (void* key1, void* key2);
+    int size;
 };
 
 int is_equal(TreeMap* tree, void* key1, void* key2){
@@ -36,12 +37,20 @@ TreeNode * createTreeNode(void* key, void * value) {
     return new;
 }
 
-TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
 
-    //new->lower_than = lower_than;
-    return NULL;
+TreeMap *createTreeMap(int (*lower_than)(void* key1, void* key2)) {
+    TreeMap *map = (TreeMap *)malloc(sizeof(TreeMap));
+    if (map == NULL) {
+        // Error: No se pudo reservar memoria para el mapa
+        return NULL;
+    }
+
+    map->root = NULL;
+    map->size = 0;
+    map->lower_than = lower_than ;
+
+    return map;
 }
-
 
 void insertTreeMap(TreeMap * tree, void* key, void * value) {
 
