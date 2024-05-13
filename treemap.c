@@ -148,8 +148,6 @@ Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
         }
     }
 
-    // No se encontró la clave en el árbol
-    *current = NULL; // Asegúrate de actualizar current a NULL si no se encuentra la clave
     return NULL;
 }
 
