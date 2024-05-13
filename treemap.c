@@ -111,11 +111,20 @@ void insertTreeMap(TreeMap *tree, void *key, void *value) {
     // Actualiza el puntero 'current' para que apunte al nuevo nodo
     current = new_node;
 }
+TreeNode *minimum(TreeNode *x) {
+    if (x == NULL) {
+        return NULL; // Si el nodo es NULL, retornamos NULL
+    }
 
-TreeNode * minimum(TreeNode * x){
+    // Nos movemos hacia abajo por la rama izquierda hasta llegar al final del subárbol
+    while (x->left != NULL) {
+        x = x->left;
+    }
 
-    return NULL;
+    // Retorna el nodo encontrado
+    return x;
 }
+
 
 
 void removeNode(TreeMap * tree, TreeNode* node) {
