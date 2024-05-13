@@ -123,9 +123,10 @@ void removeNode(TreeMap * tree, TreeNode* node) {
 }
 
 void eraseTreeMap(TreeMap * tree, void* key){
+    TreeNode *current = NULL;
     if (tree == NULL || tree->root == NULL) return;
 
-    if (searchTreeMap(tree, key, NULL) == NULL) return;
+    if (searchTreeMap(tree, key, &current) == NULL) return;
     TreeNode* node = tree->current;
     removeNode(tree, node);
 
