@@ -437,3 +437,28 @@ treemap.c:143:7: note: declared here
       |       ^~~~~~~~~~~~~
 Compilation failed
 944be55
+Mon 13 May 2024 03:25:08 AM UTC: 
+ treemap.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+In file included from test.c:4:
+treemap.c: In function ‘insertTreeMap’:
+treemap.c:57:5: error: too many arguments to function ‘searchTreeMap’
+   57 |     searchTreeMap(tree, key, &current); // Busca la clave en el árbol y actualiza el puntero 'current'
+      |     ^~~~~~~~~~~~~
+In file included from treemap.c:4,
+                 from test.c:4:
+treemap.h:17:8: note: declared here
+   17 | Pair * searchTreeMap(TreeMap * tree, void* key);
+      |        ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c: In function ‘eraseTreeMap’:
+treemap.c:138:9: error: too many arguments to function ‘searchTreeMap’
+  138 |     if (searchTreeMap(tree, key, &current) == NULL) return;
+      |         ^~~~~~~~~~~~~
+In file included from treemap.c:4,
+                 from test.c:4:
+treemap.h:17:8: note: declared here
+   17 | Pair * searchTreeMap(TreeMap * tree, void* key);
+      |        ^~~~~~~~~~~~~
+Compilation failed
+3e818d9
