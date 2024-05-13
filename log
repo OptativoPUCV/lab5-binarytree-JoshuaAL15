@@ -215,3 +215,40 @@ treemap.c:134:7: note: declared here
       |       ^~~~~~~~~~~~~
 Compilation failed
 995c541
+Mon 13 May 2024 02:49:40 AM UTC: 
+ treemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+test.c: In function ‘search_test1’:
+test.c:104:13: error: too few arguments to function ‘searchTreeMap’
+  104 |     Pair* p=searchTreeMap(tree, &key);
+      |             ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:134:7: note: declared here
+  134 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test2’:
+test.c:122:15: error: too few arguments to function ‘searchTreeMap’
+  122 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:134:7: note: declared here
+  134 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test3’:
+test.c:141:15: error: too few arguments to function ‘searchTreeMap’
+  141 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:134:7: note: declared here
+  134 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test4’:
+test.c:161:15: error: too few arguments to function ‘searchTreeMap’
+  161 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:134:7: note: declared here
+  134 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+Compilation failed
+9ef3f26
