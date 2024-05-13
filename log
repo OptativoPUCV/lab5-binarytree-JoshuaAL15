@@ -10,3 +10,58 @@ Mon 13 May 2024 02:14:45 AM UTC:
  tests:  5|7
 total_score: 5/70
 f52d661
+Mon 13 May 2024 02:28:13 AM UTC: 
+ treemap.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+In file included from test.c:4:
+treemap.c:80:7: error: conflicting types for ‘searchTreeMap’; have ‘Pair *(TreeMap *, void *, TreeNode **)’
+   80 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+In file included from treemap.c:4,
+                 from test.c:4:
+treemap.h:17:8: note: previous declaration of ‘searchTreeMap’ with type ‘Pair *(TreeMap *, void *)’
+   17 | Pair * searchTreeMap(TreeMap * tree, void* key);
+      |        ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c: In function ‘searchTreeMap’:
+treemap.c:90:21: error: assignment to ‘TreeNode **’ from incompatible pointer type ‘TreeNode *’ [-Werror=incompatible-pointer-types]
+   90 |             current = (*current)->left;
+      |                     ^
+treemap.c:93:21: error: assignment to ‘TreeNode **’ from incompatible pointer type ‘TreeNode *’ [-Werror=incompatible-pointer-types]
+   93 |             current = (*current)->right;
+      |                     ^
+test.c: In function ‘search_test1’:
+test.c:104:13: error: too few arguments to function ‘searchTreeMap’
+  104 |     Pair* p=searchTreeMap(tree, &key);
+      |             ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:80:7: note: declared here
+   80 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test2’:
+test.c:122:15: error: too few arguments to function ‘searchTreeMap’
+  122 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:80:7: note: declared here
+   80 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test3’:
+test.c:141:15: error: too few arguments to function ‘searchTreeMap’
+  141 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:80:7: note: declared here
+   80 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘search_test4’:
+test.c:161:15: error: too few arguments to function ‘searchTreeMap’
+  161 |     Pair* p = searchTreeMap(tree, &key);
+      |               ^~~~~~~~~~~~~
+In file included from test.c:4:
+treemap.c:80:7: note: declared here
+   80 | Pair *searchTreeMap(TreeMap *tree, void *key, TreeNode **current) {
+      |       ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+e78b303
