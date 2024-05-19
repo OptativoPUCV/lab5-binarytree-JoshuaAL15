@@ -41,7 +41,6 @@ TreeNode * createTreeNode(void* key, void * value) {
 TreeMap *createTreeMap(int (*lower_than)(void* key1, void* key2)) {
     TreeMap *map = (TreeMap *)malloc(sizeof(TreeMap));
     if (map == NULL) {
-        // Error: No se pudo reservar memoria para el mapa
         return NULL;
     }
 
@@ -139,26 +138,34 @@ void eraseTreeMap(TreeMap * tree, void* key){
     removeNode(tree, current );
 
 }
+Pair* searchTreeMap(TreeMap* tree, void* key) {
+    // Inicializar el puntero current como NULL
+    tree->current = NULL;
 
-Pair *searchTreeMap(TreeMap *tree, void *key) {
-    TreeNode *current = tree->root;
+    // Comenzar la búsqueda desde la raíz del árbol
+    TreeNode* current = tree->root;
 
+    // Recorrer el árbol hasta encontrar el nodo con la clave o llegar a una hoja
     while (current != NULL) {
         int cmp = tree->lower_than(key, current->pair->key);
         if (cmp == 0) {
-            // Se encontró la clave, devuelve el par asociado
+            // Se encontró la clave, actualizar el puntero current y devolver el par asociado
+            tree->current = current;
             return current->pair;
         } else if (cmp < 0) {
-            // La clave buscada es menor que la clave actual, busca en el subárbol izquierdo
+            // La clave buscada es menor que la clave actual, buscar en el subárbol izquierdo
             current = current->left;
         } else {
-            // La clave buscada es mayor que la clave actual, busca en el subárbol derecho
+            // La clave buscada es mayor que la clave actual, buscar en el subárbol derecho
             current = current->right;
         }
     }
 
+    // No se encontró la clave, devolver NULL
     return NULL;
 }
+
+
 Pair * upperBound(TreeMap * tree, void* key) {
     return NULL;
 }
