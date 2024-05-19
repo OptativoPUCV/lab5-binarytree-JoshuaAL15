@@ -152,27 +152,33 @@ void eraseTreeMap(TreeMap * tree, void* key){
 
 
 Pair* searchTreeMap(TreeMap* tree, void* key) {
-   
+    // Reiniciar el puntero current
     tree->current = NULL;
 
+    // Iniciar la búsqueda desde la raíz
     TreeNode* current = tree->root;
 
+    // Realizar búsqueda en el árbol
     while (current != NULL) {
+        // Comparar la clave del nodo actual con la clave buscada
         int cmp = tree->lower_than(key, current->pair->key);
         if (cmp == 0) {
+            // Se encontró la clave buscada, actualizar el puntero current y retornar el par asociado
             tree->current = current;
             return current->pair;
         } else if (cmp < 0) {
-            
+            // La clave buscada es menor que la clave actual, buscar en el subárbol izquierdo
             current = current->left;
         } else {
-            
+            // La clave buscada es mayor que la clave actual, buscar en el subárbol derecho
             current = current->right;
         }
     }
 
+    // Si no se encuentra la clave, retornar NULL
     return NULL;
 }
+
 
 Pair * firstTreeMap(TreeMap * tree) {
     
@@ -248,6 +254,7 @@ Pair* upperBound(TreeMap* tree, void* key) {
     // Si no se encontró una clave igual, retornar el par del nodo ub_node (el upper bound)
     return (ub_node != NULL) ? ub_node->pair : NULL;
 }
+
 
 
 
