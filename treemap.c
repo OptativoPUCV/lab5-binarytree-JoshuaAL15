@@ -87,12 +87,14 @@ void insertTreeMap(TreeMap* tree, void* key, void* value) {
     // Actualizar el puntero current para que apunte al nuevo nodo
     tree->current = new_node;
 }
-
-TreeNode *minimum(TreeNode *x) {
-    return NULL;
+TreeNode * minimum(TreeNode * x) {
+    // Mientras haya un hijo izquierdo, seguimos avanzando
+    while (x != NULL && x->left != NULL) {
+        x = x->left;
+    }
+    // Devolvemos el nodo encontrado (puede ser NULL si x es NULL)
+    return x;
 }
-
-
 
 void removeNode(TreeMap * tree, TreeNode* node) {
 
