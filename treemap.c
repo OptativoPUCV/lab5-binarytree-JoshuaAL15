@@ -90,7 +90,7 @@ Pair* searchTreeMap(TreeMap* tree, void* key) {
         }
     }
 
-    // No se encontró la clave, devolver NULL
+    // No se encontró la clave, no es necesario actualizar el puntero current
     return NULL;
 }
 
