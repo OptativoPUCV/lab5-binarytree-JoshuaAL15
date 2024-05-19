@@ -95,7 +95,6 @@ TreeNode * minimum(TreeNode * x) {
     // Devolvemos el nodo encontrado (puede ser NULL si x es NULL)
     return x;
 }
-
 void removeNode(TreeMap * tree, TreeNode* node) {
     // Caso 1: Nodo sin hijos
     if (node->left == NULL && node->right == NULL) {
@@ -110,6 +109,9 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             // El nodo es la raíz del árbol, simplemente lo marcamos como NULL
             tree->root = NULL;
         }
+        free(node->pair->key);
+        free(node->pair->value);
+        free(node->pair);
         free(node);
     }
     // Caso 2: Nodo con un hijo
@@ -128,6 +130,9 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             tree->root = child;
             child->parent = NULL;
         }
+        free(node->pair->key);
+        free(node->pair->value);
+        free(node->pair);
         free(node);
     }
     // Caso 3: Nodo con dos hijos
@@ -138,10 +143,14 @@ void removeNode(TreeMap * tree, TreeNode* node) {
     }
 }
 
-
 void eraseTreeMap(TreeMap * tree, void* key){
-    
+    if (tree == NULL || tree->root == NULL) return;
+    if (searchTreeMap(tree, key) == NULL) return;
+    TreeNode* node = tree->current;
+    removeNode(tree, node);
 }
+
+
 Pair* searchTreeMap(TreeMap* tree, void* key) {
     // Inicializar el puntero current como NULL
     tree->current = NULL;
