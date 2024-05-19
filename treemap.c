@@ -217,27 +217,28 @@ Pair* nextTreeMap(TreeMap* tree) {
     return parent->pair;
 }
 Pair* upperBound(TreeMap* tree, void* key) {
-    TreeNode *current = tree->root;
-    TreeNode *ub_node = NULL;
+    TreeNode* current = tree->root;
+    TreeNode* ub_node = NULL;
 
-    // Búsqueda del upper bound
     while (current != NULL) {
-        int cmp = tree->lower_than(current->pair->key, key);
-        if (cmp >= 0) {
-            // Si la clave del nodo actual es mayor o igual a key, actualizamos ub_node y continuamos hacia la izquierda
+        if (tree->lower_than(current->pair->key, key)) {
+            // Si la clave del nodo actual es menor que la clave proporcionada,
+            // avanzamos hacia el subárbol derecho para buscar una clave mayor o igual.
+            current = current->right;
+        } else {
+            // Si la clave del nodo actual es mayor o igual a la clave proporcionada,
+            // guardamos este nodo como candidato para upper bound y luego avanzamos hacia el subárbol izquierdo.
             ub_node = current;
             current = current->left;
-        } else {
-            // Si la clave del nodo actual es menor que key, continuamos hacia la derecha
-            current = current->right;
         }
     }
 
-    // Si encontramos un nodo con clave mayor o igual a key, retornamos su par asociado
     if (ub_node != NULL) {
+        // Si se encontró un nodo candidato para upper bound, devolvemos su par.
         return ub_node->pair;
     } else {
-        // Si no encontramos ningún nodo con clave mayor o igual a key, retornamos NULL
+        // Si no se encontró ningún nodo candidato, devolvemos NULL.
         return NULL;
     }
 }
+
