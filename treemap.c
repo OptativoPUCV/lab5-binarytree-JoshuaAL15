@@ -142,10 +142,9 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             // El nodo es la raíz del árbol, simplemente lo marcamos como NULL
             tree->root = NULL;
         }
-        free(node->pair->key);
-        free(node->pair->value);
         free(node->pair);
         free(node);
+        return;
     }
     // Caso 2: Nodo con un hijo
     else if (node->left == NULL || node->right == NULL) {
@@ -163,19 +162,18 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             tree->root = child;
             child->parent = NULL;
         }
-        free(node->pair->key);
-        free(node->pair->value);
         free(node->pair);
         free(node);
+        return;
     }
     // Caso 3: Nodo con dos hijos
     else {
         // Encontrar el sucesor del nodo actual (el menor nodo en el subárbol derecho)
         TreeNode* successor = minimum(node->right);
         // Copiar los datos del sucesor al nodo actual
-        node->pair = successor->pair; 
+        node->pair = successor->pair;
         // Eliminar el sucesor recursivamente
-        removeNode(tree, successor); 
+        removeNode(tree, successor);
     }
 }
 
