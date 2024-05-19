@@ -49,6 +49,25 @@ TreeMap* createTreeMap(int (*lower_than)(void* key1, void* key2)) {
 
     return map;
 }
+Pair* searchTreeMap(TreeMap* tree, void* key) {
+    tree->current = NULL;
+    TreeNode* current = tree->root;
+
+    while (current != NULL) {
+        int cmp = tree->lower_than(key, current->pair->key);
+        if (cmp == 0) {
+            tree->current = current;
+            return current->pair;
+        } else if (cmp < 0) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    }
+
+    return NULL;
+}
+
 void insertTreeMap(TreeMap* tree, void* key, void* value) {
     // Realizar una búsqueda para encontrar la posición de inserción
     searchTreeMap(tree, key);
@@ -163,24 +182,7 @@ void eraseTreeMap(TreeMap* tree, void* key) {
     removeNode(tree, node);
 }
 
-Pair* searchTreeMap(TreeMap* tree, void* key) {
-    tree->current = NULL;
-    TreeNode* current = tree->root;
 
-    while (current != NULL) {
-        int cmp = tree->lower_than(key, current->pair->key);
-        if (cmp == 0) {
-            tree->current = current;
-            return current->pair;
-        } else if (cmp < 0) {
-            current = current->left;
-        } else {
-            current = current->right;
-        }
-    }
-
-    return NULL;
-}
 
 Pair* firstTreeMap(TreeMap* tree) {
     if (tree == NULL || tree->root == NULL) return NULL;
