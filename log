@@ -590,3 +590,9 @@ Sun 19 May 2024 04:05:38 AM UTC:
  1 file changed, 7 insertions(+), 15 deletions(-)
  tests:  0|0
 f6a3735
+Sun 19 May 2024 04:06:45 AM UTC: 
+ treemap.c | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
+ tests:  18|3
+total_score: 35/70
+735e0b6
