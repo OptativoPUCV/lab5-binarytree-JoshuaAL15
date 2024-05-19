@@ -93,6 +93,7 @@ void insertTreeMap(TreeMap* tree, void* key, void* value) {
     tree->current = new_node;
 }
 
+
 TreeNode* minimum(TreeNode* x) {
     // Mientras haya un hijo izquierdo, seguimos avanzando
     while (x != NULL && x->left != NULL) {
@@ -102,7 +103,7 @@ TreeNode* minimum(TreeNode* x) {
     return x;
 }
 
-void removeNode(TreeMap* tree, TreeNode* node) {
+void removeNode(TreeMap * tree, TreeNode* node) {
     // Caso 1: Nodo sin hijos
     if (node->left == NULL && node->right == NULL) {
         if (node->parent != NULL) {
@@ -116,6 +117,8 @@ void removeNode(TreeMap* tree, TreeNode* node) {
             // El nodo es la raíz del árbol, simplemente lo marcamos como NULL
             tree->root = NULL;
         }
+        free(node->pair->key);
+        free(node->pair->value);
         free(node->pair);
         free(node);
     }
@@ -129,12 +132,18 @@ void removeNode(TreeMap* tree, TreeNode* node) {
             } else {
                 node->parent->right = child;
             }
-            if (child != NULL) child->parent = node->parent;
+            if (child != NULL) {
+                child->parent = node->parent;
+            }
         } else {
             // El nodo es la raíz del árbol, el hijo pasa a ser la nueva raíz
             tree->root = child;
-            if (child != NULL) child->parent = NULL;
+            if (child != NULL) {
+                child->parent = NULL;
+            }
         }
+        free(node->pair->key);
+        free(node->pair->value);
         free(node->pair);
         free(node);
     }
@@ -145,6 +154,7 @@ void removeNode(TreeMap* tree, TreeNode* node) {
         removeNode(tree, successor); 
     }
 }
+
 
 void eraseTreeMap(TreeMap* tree, void* key) {
     if (tree == NULL || tree->root == NULL) return;
