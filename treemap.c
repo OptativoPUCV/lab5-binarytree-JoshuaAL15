@@ -59,24 +59,39 @@ void insertTreeMap(TreeMap* tree, void* key, void* value) {
         return;
     }
 
-    // Verificar si la búsqueda encontró un nodo válido
-    if (tree->current == NULL) {
-        // No se encontró un nodo válido, probablemente un error de búsqueda
-        return;
-    }
-
     // Crear un nuevo nodo para el nuevo dato
     TreeNode* new_node = createTreeNode(key, value);
     if (new_node == NULL) {
-        // Error al crear el nuevo nodo
         return;
     }
 
-    // Insertar el nuevo nodo en el árbol
-    // Resto del código de inserción...
+    // Si el árbol está vacío, el nuevo nodo se convierte en la raíz
+    if (tree->root == NULL) {
+        tree->root = new_node;
+    } else {
+        // Buscar la posición correcta para insertar el nuevo nodo
+        TreeNode* current = tree->root;
+        TreeNode* parent = NULL;
+        while (current != NULL) {
+            parent = current;
+            if (tree->lower_than(key, current->pair->key)) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
+        }
+        // Insertar el nuevo nodo como hijo del nodo padre
+        if (tree->lower_than(key, parent->pair->key)) {
+            parent->left = new_node;
+        } else {
+            parent->right = new_node;
+        }
+        new_node->parent = parent;
+    }
+
+    // Actualizar el puntero current para que apunte al nuevo nodo
+    tree->current = new_node;
 }
-
-
 
 TreeNode* minimum(TreeNode* x) {
     // Mientras haya un hijo izquierdo, seguimos avanzando
