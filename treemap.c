@@ -65,9 +65,11 @@ Pair* searchTreeMap(TreeMap* tree, void* key) {
         }
     }
 
+    // Si el ciclo termina y no se encontró el dato, aquí puedes realizar alguna acción, como asignar NULL a current
+    tree->current = NULL;
+
     return NULL;
 }
-
 
 void insertTreeMap(TreeMap* tree, void* key, void* value) {
     // Realizar una búsqueda para encontrar la posición de inserción
