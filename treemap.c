@@ -138,6 +138,10 @@ void removeNode(TreeMap * tree, TreeNode* node) {
             } else {
                 node->parent->right = NULL;
             }
+            // Actualizamos el nodo raíz si el nodo eliminado es la raíz
+            if (tree->root == node) {
+                tree->root = NULL;
+            }
         } else {
             // El nodo es la raíz del árbol, simplemente lo marcamos como NULL
             tree->root = NULL;
@@ -155,6 +159,10 @@ void removeNode(TreeMap * tree, TreeNode* node) {
                 node->parent->left = child;
             } else {
                 node->parent->right = child;
+            }
+            // Actualizamos el nodo raíz si el nodo eliminado es la raíz
+            if (tree->root == node) {
+                tree->root = child;
             }
             child->parent = node->parent;
         } else {
